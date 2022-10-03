@@ -54,24 +54,37 @@ BONUS	=	ft_lstnew_bonus.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c
-			
+
+NAME		= libft.a
 OBJS		= ${SRCS:.c=.o}
 OBJS_BONUS	= ${BONUS:.c=.o}
-INCLUDES	=./
-NAME		= libft.a
+
+ifdef WITH_BONUS
+OBJ_FILES = ${OBJS} ${OBJS_BONUS}
+else
+OBJ_FILES = ${OBJS}
+endif
+
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I. -c
 RM			= rm -f
+
+all:		${NAME}
+
 .c.o:		
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
-bonus:		${OBJS} ${OBJS_BONUS}
-			ar rc ${NAME} ${OBJS} ${OBJS_BONUS}
-all:		${NAME}
+
+${NAME}:	${OBJ_FILES}
+			ar rc ${NAME} ${OBJ_FILES}
+
+bonus:		
+			@${MAKE} WITH_BONUS=1 all
 clean:
 			${RM} ${OBJS} ${OBJS_BONUS}
+
 fclean:		clean
 			${RM} ${NAME}
+
 re:			fclean all
+
 .PHONY:		all clean fclean re bonus
