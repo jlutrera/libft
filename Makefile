@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME	= 	libft.a
+
 SRCS	=	ft_bzero.c \
 			ft_strlen.c \
 			ft_strlcpy.c \
@@ -55,7 +57,6 @@ BONUS	=	ft_lstnew_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c
 
-NAME		= libft.a
 OBJS		= ${SRCS:.c=.o}
 OBJS_BONUS	= ${BONUS:.c=.o}
 
@@ -65,6 +66,7 @@ else
 OBJ_FILES = ${OBJS}
 endif
 
+INCLUDE		= libft.h
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I. -c
 RM			= rm -f
@@ -74,8 +76,8 @@ all:		${NAME}
 .c.o:		
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}:	${OBJ_FILES}
-			ar rc ${NAME} ${OBJ_FILES}
+${NAME}:	${OBJ_FILES} ${INCLUDE}
+			ar rcs ${NAME} ${OBJ_FILES}
 
 bonus:		
 			@${MAKE} WITH_BONUS=1 all

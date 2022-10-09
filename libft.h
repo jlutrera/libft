@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-#define LIBFT_H
+# define LIBFT_H
 
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdint.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdint.h>
 
 void	*ft_memset(void *dest, int c, size_t n);
 void	ft_bzero(void *b, size_t n);
@@ -55,7 +55,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 //Bonus
-typedef struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
