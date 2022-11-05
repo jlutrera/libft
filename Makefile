@@ -6,12 +6,11 @@
 #    By: jutrera- <jutrera-@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/27 18:05:52 by jutrera-          #+#    #+#              #
-#    Updated: 2022/09/27 18:48:52 by jutrera-         ###   ########.fr        #
+#    Updated: 2022/10/15 11:35:42 by jutrera-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 	libft.a
-
 SRCS	=	ft_bzero.c \
 			ft_strlen.c \
 			ft_strlcpy.c \
@@ -46,7 +45,6 @@ SRCS	=	ft_bzero.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c
-
 BONUS	=	ft_lstnew_bonus.c \
 			ft_lstsize_bonus.c \
 			ft_lstlast_bonus.c \
@@ -56,37 +54,21 @@ BONUS	=	ft_lstnew_bonus.c \
 			ft_lstclear_bonus.c \
 			ft_lstiter_bonus.c \
 			ft_lstmap_bonus.c
-
 OBJS		= ${SRCS:.c=.o}
 OBJS_BONUS	= ${BONUS:.c=.o}
-
-ifdef WITH_BONUS
-OBJ_FILES = ${OBJS} ${OBJS_BONUS}
-else
-OBJ_FILES = ${OBJS}
-endif
-
-INCLUDE		= libft.h
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -I. -c
-RM			= rm -f
+FLAGS		= -Wall -Wextra -Werror -I.
 
-all:		${NAME}
-
-.c.o:		
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-
-${NAME}:	${OBJ_FILES} ${INCLUDE}
-			ar rcs ${NAME} ${OBJ_FILES}
-
-bonus:		
-			@${MAKE} WITH_BONUS=1 all
-clean:
-			${RM} ${OBJS} ${OBJS_BONUS}
-
-fclean:		clean
-			${RM} ${NAME}
-
-re:			fclean all
-
-.PHONY:		all clean fclean re bonus
+all		:	${NAME}
+.c.o	:
+			${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+${NAME}	:	${OBJS}
+			ar -rcs ${NAME} ${OBJS}
+bonus	:	${OBJS} ${OBJS_BONUS}	
+			ar -rcs ${NAME} ${OBJS} ${OBJS_BONUS}
+clean	:
+			rm -f ${OBJS} ${OBJS_BONUS}
+fclean	:	clean
+			rm -f ${NAME}
+re		:	fclean all
+.PHONY	:	all clean fclean re bonus
